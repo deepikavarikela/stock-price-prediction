@@ -14,7 +14,7 @@ st.title("📈 Stock Prediction with Conformal Intervals")
 symbol = st.text_input("Enter Stock Symbol", "AAPL")
 confidence = st.slider("Select Confidence Level", 0.8, 0.99, 0.9)
 
-API_KEY = "d7ainl1r01qmvlmg4cc0d7ainl1r01qmvlmg4ccg"  
+API_KEY = "your_api_key"  
 
 
 def load_data(symbol):

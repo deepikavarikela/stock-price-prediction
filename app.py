@@ -18,16 +18,26 @@ API_KEY = "d7ainl1r01qmvlmg4cc0d7ainl1r01qmvlmg4ccg"
 
 # ------------------ LOAD DATA ------------------
 def load_data(symbol):
-    df = yf.download(symbol, period="5y", interval="1d")
+    try:
+        df = yf.download(symbol, period="5y", interval="1d")
 
-    if df is None or df.empty:
-        st.error("❌ No data fetched from Yahoo Finance")
-        return None
+        # If Yahoo fails → fallback
+        if df is None or df.empty:
+            raise Exception("Yahoo failed")
+
+    except:
+        st.warning("⚠️ Yahoo Finance failed, using fallback data")
+
+        # 👉 Fallback: generate synthetic data (for demo stability)
+        dates = pd.date_range(end=pd.Timestamp.today(), periods=500)
+        prices = np.cumsum(np.random.normal(0, 1, 500)) + 150
+
+        df = pd.DataFrame({"Close": prices}, index=dates)
 
     df = df.dropna()
 
     if len(df) < 60:
-        st.error("❌ Not enough data for prediction")
+        st.error("❌ Not enough data")
         return None
 
     return df

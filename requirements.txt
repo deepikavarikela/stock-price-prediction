@@ -5,5 +5,4 @@ numpy
 pandas
 matplotlib
 scikit-learn
-tensorflow
-keras
+tensorflow-cpu==2.13.0

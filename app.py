@@ -3,6 +3,7 @@ import yfinance as yf
 import requests
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
